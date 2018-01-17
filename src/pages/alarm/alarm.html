@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Alarm</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-card>
+        <ion-card-header>
+                Hi Gilbert,
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-8>Wake Time</ion-col>
+                <ion-col col-1>:</ion-col>
+                <ion-col col-3>07:30</ion-col>
+              </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-list>
+        <ion-item-sliding  *ngFor="let item of alarmItems">
+            <ion-item>
+                <ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.time"></ion-datetime>
+                <ion-toggle enabled checked={{item.checked}}></ion-toggle>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="primary">
+                    <ion-icon name="trash">
+                        Remove
+                    </ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    
+    <div text-center>
+        <button ion-button>Save</button>
+    </div>
+    
+  </ion-content>
+    
+    <ion-nav #content [root]="rootPage"></ion-nav>

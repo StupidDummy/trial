@@ -1,7 +1,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ pageTitle }}</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Setting</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,7 +14,7 @@
   <form [formGroup]="form" *ngIf="settingsReady">
     <ion-list *ngIf="page == 'main'">
       <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION1' | translate }}</ion-label>
+        <ion-label>Notification</ion-label>
         <ion-toggle formControlName="option1"></ion-toggle>
       </ion-item>
 
