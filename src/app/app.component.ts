@@ -6,7 +6,7 @@ import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
-
+import { OpenNativeSettings } from "@ionic-native/open-native-settings";
 @Component({
   templateUrl: `app.html`
 })

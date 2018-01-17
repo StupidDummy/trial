@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Settings } from '../../providers/providers';
+import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -38,9 +39,17 @@ export class SettingsPage {
     public settings: Settings,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    private openNativeSettings: OpenNativeSettings) {
   }
 
+  open(setting: string){
+    this.openNativeSettings.open(setting).then(val =>{
+      alert(setting);
+    }).catch(err =>{
+      alert(JSON.stringify(err));
+    })
+  }
   _buildForm() {
     let group: any = {
       option1: [this.options.option1],
