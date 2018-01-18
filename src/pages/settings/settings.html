@@ -32,10 +32,11 @@
         </ion-select>
       </ion-item>
 
-      <button ion-button full (click)="open('display')">Open Display</button>
       <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
         {{ 'SETTINGS_PROFILE_BUTTON' | translate }}
       </button>
+
+      <button ion-item (click)="open('display')">Open Display</button>
     </ion-list>
 
     <ion-list *ngIf="page == 'profile'">
