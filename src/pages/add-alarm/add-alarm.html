@@ -1,0 +1,72 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Alarm</ion-title>
+    </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content>
+<form (submit)="doAddAlarm()">
+    <ion-list>
+    <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="newAlarm.date" name="date" ></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>Time :</ion-label>
+        <ion-datetime displayFormat="HH:mm" [(ngModel)]="newAlarm.time" name="time"></ion-datetime>
+    </ion-item>
+    <ion-card>
+        <ion-card-header>
+            Repeat
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label>M</ion-label>
+                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.mon" name="mon"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>T</ion-label>
+                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.tue" name="tue"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>W</ion-label>
+                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.wed" name="wed"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>T</ion-label>
+                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.thru" name="thru"></ion-checkbox>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label>F</ion-label>
+                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.fri" name="fri"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>S</ion-label>
+                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.sat" name="sat"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>S</ion-label>
+                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.sun" name="sun"></ion-checkbox>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <div text-center>
+        <button ion-button>Save</button> 
+    </div>
+
+    
+
+    </ion-list>
+</form>
+</ion-content>
