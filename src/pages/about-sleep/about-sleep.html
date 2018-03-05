@@ -1,0 +1,25 @@
+<!--
+  Generated template for the AboutSleepPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>About Sleep</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item *ngFor= "let item of itemDetail" (click)="openDetail(item.name)">
+      {{item.title}}
+    </button>
+  </ion-list>
+</ion-content>
