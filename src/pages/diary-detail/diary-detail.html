@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card *ngFor="let item of detailDiary" >
+    <ion-card-header>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]= "item.date"></ion-datetime>
+        <button ion-button color="primary" (click)="deleteEntry(item.rowid)">
+          <ion-icon name="trash">
+          </ion-icon>
+        </button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+          <ion-label>Time In Bed</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.tib"></ion-datetime>
+      </ion-item>
+      <ion-item>
+          <ion-label>Time Fall Asleep</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.tfa"></ion-datetime>
+      </ion-item>
+      <ion-item>
+          <ion-label>Time Wake Up</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.twu"></ion-datetime>
+      </ion-item>                        
+      <ion-item>
+          <ion-label>Time Out Of Bed</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.toob"></ion-datetime>
+      </ion-item>                    
+      <button ion-button color="primary" (click)="updateEntry(item.rowid,item.tib,item.tfa,item.twu,item.toob)">
+        Save
+      </button>
+    </ion-card-content>
+  </ion-card> 
+</ion-content>

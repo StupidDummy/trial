@@ -19,6 +19,7 @@ export class MyApp {
     { title: 'Sleep Diary', component: 'SleepDiaryPage'},
     { title: 'Alarm', component: 'AlarmPage'},
     { title: 'Settings', component: 'SettingsPage' },
+    { title: 'Meditation', component: 'MeditationPage'},
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {

@@ -3,42 +3,75 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>Sleep Diary</ion-title>
+      <ion-title>Meditation</ion-title>
     </ion-navbar>
   </ion-header>
   
   <ion-content padding>
-    <ion-card>
-        <ion-card-header>
-                Hi Gilbert,
-        </ion-card-header>
-    </ion-card>
-    <ion-list>
-        <ion-item>
-            <ion-label>Date</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]= "event.month"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>Time In Bed</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]= "event.timeInBed"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>Time Fall Asleep</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]= "event.timeFallAsleep"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>Time Wake Up</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]= "event.timeWakeUp"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>Time Out Of Bed</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]= "event.timeOutOfBed"></ion-datetime>
-        </ion-item>
-    </ion-list> 
-    <div text-center>
-        <button ion-button>Save</button>
-    </div>
-    
+        <ion-card>
+            <ion-card-content>
+                <ion-card-title>
+                    3-Minute guided meditation practices
+                </ion-card-title>
+                <p>
+                    A brief mindfulness meditation practice to relax your body and focus your mind
+                </p>
+            </ion-card-content>
+                
+            <ion-row no-padding>
+                <ion-col>
+                    <button ion-button clear small color="danger" icon-start (click)="playAudio()">
+                    <ion-icon name='play'></ion-icon>
+                        Start
+                    </button>
+                </ion-col>
+                <ion-col text-center>
+                    <button ion-button clear small color="danger" icon-start (click)="pauseAudio()">
+                    <ion-icon name='pause'></ion-icon>
+                        Pause
+                    </button>
+                </ion-col>
+                <ion-col text-right>
+                    <button ion-button clear small color="danger" icon-start (click)="stopAudio()">
+                    <ion-icon name='square'></ion-icon>
+                        Stop
+                    </button>
+                </ion-col>
+            </ion-row>
+                
+        </ion-card>
+        <ion-card>
+                <ion-card-content>
+                    <ion-card-title>
+                        5-Minute guided breathing meditation practices
+                    </ion-card-title>
+                    <p>
+                        This practice can help reduce stress, anxiety, and negative emotions.
+                    </p>
+                </ion-card-content>
+                    
+                <ion-row no-padding>
+                    <ion-col>
+                        <button ion-button clear small color="danger" icon-start (click)="playAudio()">
+                        <ion-icon name='play'></ion-icon>
+                            Start
+                        </button>
+                    </ion-col>
+                    <ion-col text-center>
+                        <button ion-button clear small color="danger" icon-start (click)="pauseAudio()">
+                        <ion-icon name='pause'></ion-icon>
+                            Pause
+                        </button>
+                    </ion-col>
+                    <ion-col text-right>
+                        <button ion-button clear small color="danger" icon-start (click)="stopAudio()">
+                        <ion-icon name='square'></ion-icon>
+                            Stop
+                        </button>
+                    </ion-col>
+                </ion-row>
+                    
+            </ion-card>
   </ion-content>
     
     <ion-nav #content [root]="rootPage"></ion-nav>

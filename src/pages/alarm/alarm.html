@@ -1,24 +1,24 @@
 <ion-header>
     <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Alarm</ion-title>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Alarm</ion-title>
     </ion-navbar>
-  </ion-header>
+</ion-header>
   
-  <ion-content padding>
+<ion-content padding>
     <ion-card>
         <ion-card-header>
-                Hi Gilbert,
+            Hi Gilbert,
         </ion-card-header>
         <ion-card-content>
             <ion-grid>
-              <ion-row>
-                <ion-col col-8>Wake Time</ion-col>
-                <ion-col col-1>:</ion-col>
-                <ion-col col-3>07:30</ion-col>
-              </ion-row>
+                <ion-row>
+                    <ion-col col-8>Wake Time</ion-col>
+                    <ion-col col-1>:</ion-col>
+                    <ion-col col-3>07:30</ion-col>
+                </ion-row>
             </ion-grid>
         </ion-card-content>
     </ion-card>
@@ -27,10 +27,10 @@
         <ion-item-sliding  *ngFor="let item of alarmItems">
             <ion-item>
                 <ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.time"></ion-datetime>
-                <ion-toggle enabled checked={{item.checked}}></ion-toggle>
+                <ion-toggle enabled checked={{item.checked}} (ionChange)="updateEnable(item.rowid,item.checked)"></ion-toggle>
             </ion-item>
             <ion-item-options side="right">
-                <button ion-button color="primary">
+                <button ion-button color="primary" (click)="deleteAlarm(item.rowid)">
                     <ion-icon name="trash">
                         Remove
                     </ion-icon>
@@ -39,11 +39,12 @@
         </ion-item-sliding>
     </ion-list>
     
-    <div text-center>
-        <button ion-button (click)="addNewAlarm()">Add</button>
-        <button ion-button (click)="scheduleNotification()">Notification</button>
-    </div>
-    
   </ion-content>
-    
-    <ion-nav #content [root]="rootPage"></ion-nav>
+  <ion-footer no-shadow>
+    <ion-toolbar position="bottom">
+        <div text-center>
+            <button ion-button (click)="addNewAlarm()">Add</button>
+        </div>
+    </ion-toolbar>
+    </ion-footer>    
+<ion-nav #content [root]="rootPage"></ion-nav>

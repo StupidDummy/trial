@@ -1,44 +1,102 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Sleep Diary</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <ion-card>
-        <ion-card-header>
-                Hi Gilbert,
-        </ion-card-header>
-    </ion-card>
-    <ion-list>
-        <ion-item>
-            <ion-label>Date</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]= "event.month"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>Time In Bed</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]= "event.timeInBed"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>Time Fall Asleep</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]= "event.timeFallAsleep"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>Time Wake Up</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]= "event.timeWakeUp"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>Time Out Of Bed</ion-label>
-            <ion-datetime displayFormat="HH:mm" [(ngModel)]= "event.timeOutOfBed"></ion-datetime>
-        </ion-item>
-    </ion-list> 
-    <div text-center>
-        <button ion-button>Save</button>
-    </div>
-    
-  </ion-content>
-    
+        <ion-navbar>
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <ion-title>Sleep Diary</ion-title>
+        </ion-navbar>
+    </ion-header>
+      
+    <ion-content padding>
+        <ion-card>
+            <ion-card-header>
+                    Hi Gilbert, here are you sleep diary summary!
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid >
+                    <ion-row>
+                        <ion-col col-8>Performance</ion-col>
+                        <ion-col col-1>:</ion-col>
+                        <ion-col col-3 >{{sleepPerformance}} %</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-8>Bed Time</ion-col>
+                        <ion-col col-1>:</ion-col>
+                        <ion-col col-3>22:00</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-8>Wake Time</ion-col>
+                        <ion-col col-1>:</ion-col>
+                        <ion-col col-3>07:30</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-8>Sleep Duration</ion-col>
+                        <ion-col col-1>:</ion-col>
+                        <ion-col col-3>{{averageSleepTime}} hours</ion-col>
+                    </ion-row>
+                </ion-grid>
+                <canvas #lineCanvas></canvas>
+                <canvas #lineCanvas2></canvas>
+            </ion-card-content>
+        </ion-card>
+        <div>
+            <ion-slides >
+                <ion-slide *ngFor="let item of recentDiary">
+                    <ion-card (click)="editDetail(item.rowid)" >
+                        <ion-card-header>
+                            <ion-datetime disabled displayFormat="DDD, DD MMM YYYY" [(ngModel)]= "item.date"></ion-datetime>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <ion-item>
+                                <ion-label>Time In Bed</ion-label>
+                                <ion-datetime disabled displayFormat="HH:mm" [(ngModel)]= "item.tib"></ion-datetime>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Time Fall Asleep</ion-label>
+                                <ion-datetime disabled displayFormat="HH:mm" [(ngModel)]= "item.tfa"></ion-datetime>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Time Wake Up</ion-label>
+                                <ion-datetime disabled displayFormat="HH:mm" [(ngModel)]= "item.twu"></ion-datetime>
+                            </ion-item>                        
+                            <ion-item>
+                                <ion-label>Time Out Of Bed</ion-label>
+                                <ion-datetime disabled displayFormat="HH:mm" [(ngModel)]= "item.toob"></ion-datetime>
+                            </ion-item>                    
+                            
+                        </ion-card-content>
+                    </ion-card>
+                </ion-slide>
+            </ion-slides>
+        </div>
+        <form (submit)="addNewEntry()">
+            <ion-list>
+                <ion-item>
+                    <ion-label>Date</ion-label>
+                    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]= "entry.date" name="date"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Time In Bed</ion-label>
+                    <ion-datetime displayFormat="HH:mm" [(ngModel)]= "entry.timeInBed" name="timeInBed"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Time Fall Asleep</ion-label>
+                    <ion-datetime displayFormat="HH:mm" [(ngModel)]= "entry.timeFallAsleep" name="timeFallAsleep"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Time Wake Up</ion-label>
+                    <ion-datetime displayFormat="HH:mm" [(ngModel)]= "entry.timeWakeUp" name="timeWakeUp"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Time Out Of Bed</ion-label>
+                    <ion-datetime displayFormat="HH:mm" [(ngModel)]= "entry.timeOutOfBed" name="timeOutOfBed"></ion-datetime>
+                </ion-item> 
+                <div text-center>
+                    <button ion-button>Save</button>
+                </div>
+            </ion-list>
+        </form>
+        
+    </ion-content>
+        
     <ion-nav #content [root]="rootPage"></ion-nav>

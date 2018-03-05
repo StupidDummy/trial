@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
+import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media'
 
 @IonicPage()
 @Component({
@@ -8,13 +9,31 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class MeditationPage {
     
+  pause ='false'
+  constructor(public navCtrl: NavController,
+  private streamingMedia: StreamingMedia,) { }
 
-  constructor(public navCtrl: NavController) { }
-  public event ={
-    month: '2018-01-02',
-    timeInBed: '23:40',
-    timeFallAsleep: '00:15',
-    timeWakeUp: '05:35',
-    timeOutOfBed: '06:15'
-}
+
+  playAudio(){
+    let options:StreamingAudioOptions ={
+      successCallback: () => {console.log()},
+      errorCallback: () => {console.log()},
+      initFullscreen:false,
+    }
+    
+    this.streamingMedia.playAudio('assets/sounds/3-Minute.mp3', options);
+
+  }
+
+  pauseAudio(){
+    if(this.pause){
+      this.streamingMedia.resumeAudio();
+    }else{
+      this.streamingMedia.pauseAudio();
+    }
+  }
+
+  stopAudio(){
+    this.streamingMedia.stopAudio();
+  }
 }
