@@ -8,31 +8,33 @@
   </ion-header>
   
   <ion-content padding>
-        <ion-card>
+        <ion-card *ngFor="let item of listOfMeditation">
             <ion-card-content>
                 <ion-card-title>
-                    3-Minute guided meditation practices
+                    {{item.title}}
                 </ion-card-title>
                 <p>
-                    A brief mindfulness meditation practice to relax your body and focus your mind
+                    {{item.description}}
                 </p>
             </ion-card-content>
                 
             <ion-row no-padding>
+                <audio [id]="item.id" [src]="item.source"></audio>
+                
                 <ion-col>
-                    <button ion-button clear small color="danger" icon-start (click)="playAudio()">
+                    <button ion-button clear small color="danger" [id]="item.id" icon-start onclick="document.getElementById(id).play();">
                     <ion-icon name='play'></ion-icon>
                         Start
                     </button>
                 </ion-col>
                 <ion-col text-center>
-                    <button ion-button clear small color="danger" icon-start (click)="pauseAudio()">
+                    <button ion-button clear small color="danger" [id]="item.id" icon-start onclick="document.getElementById(id).pause()">
                     <ion-icon name='pause'></ion-icon>
                         Pause
                     </button>
                 </ion-col>
                 <ion-col text-right>
-                    <button ion-button clear small color="danger" icon-start (click)="stopAudio()">
+                    <button ion-button clear small color="danger" [id]="item.id" icon-start onclick="document.getElementById(id).pause();document.getElementById(id).currentTime=0;">
                     <ion-icon name='square'></ion-icon>
                         Stop
                     </button>
@@ -40,38 +42,6 @@
             </ion-row>
                 
         </ion-card>
-        <ion-card>
-                <ion-card-content>
-                    <ion-card-title>
-                        5-Minute guided breathing meditation practices
-                    </ion-card-title>
-                    <p>
-                        This practice can help reduce stress, anxiety, and negative emotions.
-                    </p>
-                </ion-card-content>
-                    
-                <ion-row no-padding>
-                    <ion-col>
-                        <button ion-button clear small color="danger" icon-start (click)="playAudio()">
-                        <ion-icon name='play'></ion-icon>
-                            Start
-                        </button>
-                    </ion-col>
-                    <ion-col text-center>
-                        <button ion-button clear small color="danger" icon-start (click)="pauseAudio()">
-                        <ion-icon name='pause'></ion-icon>
-                            Pause
-                        </button>
-                    </ion-col>
-                    <ion-col text-right>
-                        <button ion-button clear small color="danger" icon-start (click)="stopAudio()">
-                        <ion-icon name='square'></ion-icon>
-                            Stop
-                        </button>
-                    </ion-col>
-                </ion-row>
-                    
-            </ion-card>
   </ion-content>
     
     <ion-nav #content [root]="rootPage"></ion-nav>

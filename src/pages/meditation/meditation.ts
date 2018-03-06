@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media'
 
 @IonicPage()
 @Component({
@@ -9,31 +8,23 @@ import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-m
 })
 export class MeditationPage {
     
-  pause ='false'
-  constructor(public navCtrl: NavController,
-  private streamingMedia: StreamingMedia,) { }
-
-
-  playAudio(){
-    let options:StreamingAudioOptions ={
-      successCallback: () => {console.log()},
-      errorCallback: () => {console.log()},
-      initFullscreen:false,
+  listOfMeditation = [
+    {
+      title : '3-Minute guided meditation practices',
+      description : 'A brief mindfulness meditation practice to relax your body and focus your mind.',
+      id : 'meditation1',
+      source : 'assets/sounds/3-Minute.mp3',
+    },
+    {
+      title : '5-Minute guided breathing meditation practices',
+      description : 'This practice can help reduce stress, anxiety, and negative emotions.',
+      id : 'meditation2',
+      source : 'assets/sounds/5-Minute Breathing Meditation.mp3'
     }
-    
-    this.streamingMedia.playAudio('assets/sounds/3-Minute.mp3', options);
+  ]
+  constructor(public navCtrl: NavController
+  ) { }
 
-  }
 
-  pauseAudio(){
-    if(this.pause){
-      this.streamingMedia.resumeAudio();
-    }else{
-      this.streamingMedia.pauseAudio();
-    }
-  }
-
-  stopAudio(){
-    this.streamingMedia.stopAudio();
-  }
+  
 }
