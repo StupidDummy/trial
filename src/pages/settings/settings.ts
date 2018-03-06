@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Toast } from '@ionic-native/toast';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Settings } from '../../providers/providers';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
+import { WelcomePage } from '../welcome/welcome';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -40,9 +42,35 @@ export class SettingsPage {
     public formBuilder: FormBuilder,
     public navParams: NavParams,
     public translate: TranslateService,
-    private openNativeSettings: OpenNativeSettings) {
+    private openNativeSettings: OpenNativeSettings,
+    private sqlite: SQLite,
+    private toast: Toast,
+  ) {
   }
 
+  
+  signOut(){ 
+    this.sqlite.create({
+    name:'ionicalarm.db',
+    location: 'default'
+  }).then((db: SQLiteObject)=>{
+    db.executeSql('DELETE FROM signedIn WHERE rowid=?',['1'])
+    .then(res=>{
+      this.toast.show('Sign Out successfully','5000','center').subscribe(
+        toast =>{
+          this.navCtrl.setRoot(WelcomePage);
+        }
+      );
+    })
+    .catch(e =>{
+      this.toast.show('Sign Out failed','5000','center').subscribe(
+        toast =>{
+          this.navCtrl.setRoot(WelcomePage);
+        }
+      );
+    });
+  }).catch(e => console.log(e))
+  }
   open(setting: string){
     this.openNativeSettings.open(setting).then(val =>{
       alert(setting);

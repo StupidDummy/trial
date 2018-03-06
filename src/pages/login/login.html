@@ -29,7 +29,11 @@
         <ion-label floating>{{ 'PASSWORD' | translate }}</ion-label>
         <ion-input type="password" [(ngModel)]="account.password" name="password" placeholder="Password"></ion-input>
       </ion-item>
-
+      <ion-item>
+        <ion-label>Keep me signed in</ion-label>
+        <ion-checkbox [(ngModel)]="account.keepSignedIn" name="account.keepSignedIn"> </ion-checkbox>
+      </ion-item>
+     
       <div padding text-center>
         <button ion-button color="primary" >{{ 'LOGIN_BUTTON' | translate }}</button>
       </div>
@@ -37,4 +41,13 @@
             
     </ion-list>
   </form>
+  <ion-item *ngFor = "let item of data">
+    <div>
+      <p>{{item.rowid}}</p>
+      <p>{{item.name}}</p>
+      <p>{{item.email}}</p>
+      <p>{{item.password}}</p>
+      <button (click)=delete(item.rowid)>delete</button>
+    </div>
+  </ion-item>
 </ion-content>
