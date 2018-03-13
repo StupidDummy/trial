@@ -4,12 +4,17 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
 
+declare var cordova;
+
 @IonicPage()
 @Component({
   selector: 'page-alarm',
   templateUrl: 'alarm.html'
 })
+
 export class AlarmPage {
+  test :any
+  dayTemp : any
   temp: any[];
   alarmItems: any[];
   session: any[];
@@ -59,130 +64,129 @@ export class AlarmPage {
   scheduleNotification(rowid, time, enable, day){
     
         if(enable =='true'){
-          this.toast.show('alarm time debug 1 scheduled' ,'1000','center').subscribe(
-            toast =>{
-              console.log(toast);
-            }
-          );
             if(day == 'mon'){
-              this.localNotifications.schedule({
+              this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(1)))
+              this.test.setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)
+              cordova.plugins.notification.local.schedule({
                 id: rowid,
                 title: 'Alarm',
-                firstAt: 'monday',
                 text: time,
-                at : new Date(new Date().setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)),
-                data: { mydata:'Hidden Messages'},
-                every: 'week'
+                at : this.test,
+                data: { mydata:'Hidden Messages'}
               });
-              this.toast.show('alarm time  mon scheduled' ,'5000','center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
               );
             }
             else if(day == 'tue'){
-              this.localNotifications.schedule({
+              this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(2)))
+              this.test.setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)
+              cordova.plugins.notification.local.schedule({
                 id: rowid,
                 title: 'Alarm',
-                firstAt: 'tuesday',
                 text: time,
-                at : new Date(new Date().setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)),
-                data: { mydata:'Hidden Messages'},
-                every: 'week'
+                at : this.test,
+                data: { mydata:'Hidden Messages'}
               });
-              this.toast.show('alarm time  tue scheduled' ,'5000','center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
               );
             }
             else if(day == 'wed'){
-              this.localNotifications.schedule({
+              this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(3)))
+              this.test.setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)
+              cordova.plugins.notification.local.schedule({
                 id: rowid,
                 title: 'Alarm',
-                firstAt: 'wednesday',
                 text: time,
-                at : new Date(new Date().setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)),
-                data: { mydata:'Hidden Messages'},
-                every: 'week'
+                at : this.test,
+                data: { mydata:'Hidden Messages'}
               });
-              this.toast.show('alarm time  wed scheduled' ,'5000','center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
               );
             }
             else if(day == 'thur'){
-              this.localNotifications.schedule({
+              this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(4)))
+              this.test.setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)
+              cordova.plugins.notification.local.schedule({
                 id: rowid,
                 title: 'Alarm',
-                firstAt: "thursday",
                 text: time,
-                at : new Date(new Date().setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)),
-                data: { mydata:'Hidden Messages'},
-                every: "week"
+                at : this.test,
+                data: { mydata:'Hidden Messages'}
               });
-              this.toast.show('alarm time  thurs scheduled' ,'5000','center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
               );
             }
             else if(day == 'fri'){
-              this.localNotifications.schedule({
+              this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(5)))
+              this.test.setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)
+              cordova.plugins.notification.local.schedule({
                 id: rowid,
                 title: 'Alarm',
                 text: time,
-                at : new Date(new Date().setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)),
-                data: { mydata:'Hidden Messages'},
+                at : this.test,
+                data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(new Date(new Date().getDate()).getDay().toString() + new Date(new Date().getDate()).toString(),'5000','center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
               );
             }
             else if(day == 'sat'){
-              this.localNotifications.schedule({
+              this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(6)))
+              this.test.setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)
+              cordova.plugins.notification.local.schedule({
                 id: rowid,
                 title: 'Alarm',
-                firstAt: 'saturday',
                 text: time,
-                at : new Date(new Date().setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)),
-                data: { mydata:'Hidden Messages'},
-                every: 'week'
+                at : this.test,
+                data: { mydata:'Hidden Messages'}
               });
-              this.toast.show('alarm time sat scheduled' ,'5000','center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
               );
             }
             else if(day == 'sun'){
-              this.localNotifications.schedule({
+              this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(7)))
+              this.test.setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)
+              cordova.plugins.notification.local.schedule({
                 id: rowid,
                 title: 'Alarm',
-                firstAt: 'sunday',
                 text: time,
-                at : new Date(new Date().setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)),
-                data: { mydata:'Hidden Messages'},
-                every: 'week'
+                at : this.test,
+                data: { mydata:'Hidden Messages'}
               });
-              this.toast.show('alarm time  sun scheduled' ,'5000','center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
               );
             }
             else {
-              this.localNotifications.schedule({
+              this.test = new Date(new Date().setFullYear(Number(day.toString().substring(0,4)), Number(day.toString().substring(5,7))-1, Number(day.toString().substring(8,10))))
+              this.test.setHours(Number(time.toString().substring(0,2)),Number(time.toString().substring(3,5)),0o0,0o0)
+              cordova.plugins.notification.local.schedule({
                 id: rowid,
                 title: 'Alarm',
                 text: time,
-                at : new Date(new Date().getDate()),
+                at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show('date here yea' + new Date(new Date().setFullYear(Number(day.substring(0,4)),Number(day.substring(5,7)),Number(day.substring(8,10)))).toString() ,'15000','center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
@@ -202,6 +206,14 @@ export class AlarmPage {
   ionViewWillEnter(){
     this.getSession();
     this.getAlarm();
+  }
+
+  getDiffDay(day){
+    if (day <= new Date().getDay()){
+      return( day + 7 - new Date().getDay())
+    }else{
+      return( day - new Date().getDay()  )
+    }
   }
 
   getAlarm(){
