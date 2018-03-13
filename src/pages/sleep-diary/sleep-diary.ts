@@ -19,6 +19,7 @@ export class SleepDiaryPage {
   recentData:any[];
   recentDiary: any[];
   lineChart: any;
+  session : string
   entry = {
     date  : new Date(new Date().getDate()),
     timeInBed :new Date(new Date().getHours()),
@@ -39,17 +40,23 @@ export class SleepDiaryPage {
 
   getRecentDiary(){
     this.sqlite.create({
-      name:'ionicalarm.db',
-      location: 'default'
-    }).then((db: SQLiteObject)=>{
+    name: 'ionicalarm.db',
+    location: 'default'
+  }).then((db: SQLiteObject)=>{
+    db.executeSql('SELECT * FROM session',{})
+    .then(res=>{
       ///tib = time in bed
       ///tfa = time fall asleep
       ///twu = time wake up
       ///toob = time out of bed
-      db.executeSql('CREATE TABLE IF NOT EXISTS diaryHistory(rowid INTEGER PRIMARY KEY, date TEXT, tib TEXT, tfa TEXT, twu TEXT, toob TEXT)',{})
-      .then(res=> console.log('Executed SQL'))
-      .catch(e => console.log(e));
-      db.executeSql('SELECT * FROM diaryHistory ORDER BY date DESC LIMIT 7',{})
+      db.executeSql('CREATE TABLE IF NOT EXISTS diaryHistory(rowid INTEGER PRIMARY KEY, date TEXT, tib TEXT, tfa TEXT, twu TEXT, toob TEXT, email TEXT)',{})
+      .then(res=> {
+        console.log(res)
+      })
+      .catch(e => {
+        console.log(e)
+      });
+      db.executeSql('SELECT * FROM diaryHistory WHERE email=? ORDER BY date DESC LIMIT 7',[res.rows.item(0).email])
       .then(res=> {
 
         this.recentDiary =[];
@@ -70,8 +77,24 @@ export class SleepDiaryPage {
         
         
       })
-      .catch(e =>console.log(e));
+      .catch(e =>{
+        this.toast.show('failed to fetch data! '+e,'5000','center').subscribe(
+          toast =>{
+            console.log(toast);
+          }
+        );
+      });
     })
+    .catch(e =>{
+      this.toast.show('No session detected!','5000','center').subscribe(
+        toast =>{
+          console.log(toast);
+        }
+      );
+    })
+  })
+  .catch(e => console.log(e))
+   
     
   }
   getDif(x,y){
@@ -85,14 +108,15 @@ export class SleepDiaryPage {
     }
   }
 
-  
 
   addNewEntry(){
     this.sqlite.create({
       name: 'ionicalarm.db',
       location: 'default'
     }).then((db: SQLiteObject)=>{
-      db.executeSql('INSERT INTO diaryHistory VALUES(NULL,?,?,?,?,?)',[this.entry.date.toString(),this.entry.timeInBed.toString(),this.entry.timeFallAsleep.toString(),this.entry.timeWakeUp.toString(),this.entry.timeOutOfBed.toString()])
+      db.executeSql('SELECT * FROM session',{})
+    .then(res=>{
+      db.executeSql('INSERT INTO diaryHistory VALUES(NULL,?,?,?,?,?,?)',[this.entry.date.toString(),this.entry.timeInBed.toString(),this.entry.timeFallAsleep.toString(),this.entry.timeWakeUp.toString(),this.entry.timeOutOfBed.toString(),res.rows.item(0).email])
       .then(res=>{
         console.log(res);
         this.toast.show('success input','5000','center').subscribe(
@@ -104,12 +128,12 @@ export class SleepDiaryPage {
       })
       .catch(e =>{
         console.log(e);
-        this.toast.show("failed " + e + " " + this.entry.date.toString() + " " + this.entry.timeFallAsleep.toString(),'5000','center').subscribe(
-          toast =>{
-            console.log(toast);
-          }
-        );
+        
       });
+    })
+    .catch(e =>{
+      console.log(e)
+    })
     })
     .catch(e =>{
       console.log(e);
@@ -130,7 +154,6 @@ export class SleepDiaryPage {
   }
   
   ionViewDidLoad(){
-
     this.getRecentDiary();
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
  

@@ -10,7 +10,7 @@
 <ion-content padding>
     <ion-card>
         <ion-card-header>
-            Hi Gilbert,
+            Hi {{user.name}},
         </ion-card-header>
         <ion-card-content>
             <ion-grid>
@@ -24,20 +24,24 @@
     </ion-card>
 
     <ion-list>
-        <ion-item-sliding  *ngFor="let item of alarmItems">
-            <ion-item>
-                <ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.time"></ion-datetime>
-                <ion-toggle enabled checked={{item.checked}} (ionChange)="updateEnable(item.rowid,item.checked)"></ion-toggle>
-            </ion-item>
-            <ion-item-options side="right">
-                <button ion-button color="primary" (click)="deleteAlarm(item.rowid)">
-                    <ion-icon name="trash">
-                        Remove
-                    </ion-icon>
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
+            <ion-item-sliding  *ngFor="let item of alarmItems">
+                <ion-item no-padding>
+                    <ion-label><ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.time"></ion-datetime></ion-label>
+                    <div item-content>
+                        {{item.freq}}
+                    </div>
+                    <ion-toggle enabled checked={{item.checked}} (ionChange)="updateEnable(item.rowid,item.checked)"></ion-toggle>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="primary" (click)="deleteAlarm(item.rowid)">
+                        <ion-icon name="trash">
+                            Remove
+                        </ion-icon>
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+        
     
   </ion-content>
   <ion-footer no-shadow>

@@ -85,7 +85,6 @@ export class LoginPage {
   // Attempt to login in through our User service
   doLogin() {
     
-    
     this.sqlite.create({
       name: 'ionicalarm.db',
       location: 'default'
@@ -102,6 +101,25 @@ export class LoginPage {
           );
         }
         else if(res.rows.length!= 0 && this.account.email==res.rows.item(0).email && this.account.password == res.rows.item(0).password){
+          db.executeSql('CREATE TABLE IF NOT EXISTS session(rowid INTEGER PRIMARY KEY, email TEXT)',{})
+          .then(res=> console.log('Executed SQL'))
+          .catch(e => console.log(e));
+          db.executeSql('DELETE FROM session WHERE rowid=?',['1'])
+          .then(res=> console.log(res))
+          .catch(e => console.log(e));
+          db.executeSql('INSERT INTO session VALUES(NULL,?)',[this.account.email])
+          .then(res=> {
+            this.toast.show('session inserted!'+this.account.email,'5000','center').subscribe(
+              toast =>{
+                console.log(toast);
+              }
+            );
+          })
+          .catch(e => {this.toast.show('Error saving session '+ e,'5000','center').subscribe(
+            toast =>{
+              console.log(toast);
+            }
+          )})
           if(this.account.keepSignedIn){
             db.executeSql('INSERT INTO signedIn VALUES(NULL,?)',[this.account.email])
           .then(res=>console.log(res))

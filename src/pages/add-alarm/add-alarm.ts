@@ -13,24 +13,20 @@ import { Toast } from '@ionic-native/toast';
 })
 
 export class AddAlarmPage {
-  newAlarm: { date:Date, time: Date, mon :boolean, tue: boolean,
-  wed: boolean, thru: boolean, fri:boolean, sat:boolean, sun:boolean } = {
-    date :new Date(),
-    time :new Date(),
+  
+  data = {
+    checked  : false,
+    time : new Date(new Date().getHours()),
+    date : new Date(new Date().getDate()),
     mon : false,
     tue : false,
     wed : false,
-    thru: false,
+    thur: false,
     fri : false,
     sat : false,
     sun : false
   };
-    
-  data = {
-    checked  : true,
-    time :new Date(new Date().getHours())
-  };
-   
+  public session:string
 
   constructor(public navCtrl: NavController,
     public toastCtrl: ToastController,
@@ -77,23 +73,71 @@ export class AddAlarmPage {
       name: 'ionicalarm.db',
       location: 'default'
     }).then((db: SQLiteObject)=>{
-      db.executeSql('INSERT INTO alarm VALUES(NULL,?,?)',[this.data.checked,this.data.time.toString()])
+      db.executeSql('SELECT * FROM session',{})
       .then(res=>{
-        console.log(res);
-        this.toast.show(this.data.time.toString(),'5000','center').subscribe(
-          toast => {
-            this.navCtrl.popToRoot();
-          }
-        );
-      })
-      .catch(e =>{
-        console.log(e);
-        this.toast.show(e,'5000','center').subscribe(
-          toast =>{
-            console.log(toast);
-          }
-        );
-      });
+        if(this.data.mon){
+          db.executeSql('INSERT INTO alarm VALUES(NULL,?,?,?,?,?)',[this.data.checked,this.data.time.toString(),this.data.date.toString(),'mon',res.rows.item(0).email])
+          .then(res=>{
+           
+          })
+          .catch(e=>console.log(e))
+        }
+        if(this.data.tue){
+          db.executeSql('INSERT INTO alarm VALUES(NULL,?,?,?,?,?)',[this.data.checked,this.data.time.toString(),this.data.date.toString(),'tue',res.rows.item(0).email])
+          .then(res=>{
+           
+          })
+            .catch(e=>console.log(e))
+        }if(this.data.wed){
+          db.executeSql('INSERT INTO alarm VALUES(NULL,?,?,?,?,?)',[this.data.checked,this.data.time.toString(),this.data.date.toString(),'wed',res.rows.item(0).email])
+          .then(res=>{
+           
+          })
+            .catch(e=>console.log(e))
+        }if(this.data.thur){
+          db.executeSql('INSERT INTO alarm VALUES(NULL,?,?,?,?,?)',[this.data.checked,this.data.time.toString(),this.data.date.toString(),'thur',res.rows.item(0).email])
+          .then(res=>{
+           
+          })
+            .catch(e=>console.log(e))
+        }if(this.data.fri){
+          db.executeSql('INSERT INTO alarm VALUES(NULL,?,?,?,?,?)',[this.data.checked,this.data.time.toString(),this.data.date.toString(),'fri',res.rows.item(0).email])
+          .then(res=>{
+           
+          })
+            .catch(e=>console.log(e))
+        }if(this.data.sat){
+          db.executeSql('INSERT INTO alarm VALUES(NULL,?,?,?,?,?)',[this.data.checked,this.data.time.toString(),this.data.date.toString(),'sat',res.rows.item(0).email])
+          .then(res=>{
+           
+          })
+            .catch(e=>console.log(e))
+        }if(this.data.sun){
+          db.executeSql('INSERT INTO alarm VALUES(NULL,?,?,?,?,?)',[this.data.checked,this.data.time.toString(),this.data.date.toString(),'sun',res.rows.item(0).email])
+          .then(res=>{
+           
+          })
+            .catch(e=>console.log(e))
+        }
+        if(!this.data.mon && !this.data.tue && !this.data.wed && !this.data.thur && !this.data.fri && !this.data.sat && !this.data.sun){
+          db.executeSql('INSERT INTO alarm VALUES(NULL,?,?,?,?,?)',[this.data.checked,this.data.time.toString(),this.data.date.toString(),this.data.date.toString(),res.rows.item(0).email])
+          .then(res=>{
+           
+          })
+            .catch(e=>console.log(e))
+        }
+        
+          this.navCtrl.popToRoot();
+        })
+        .catch(e =>{
+          console.log(e);
+          this.toast.show(e,'5000','center').subscribe(
+            toast =>{
+              console.log(toast);
+            }
+          );
+        });
+        
     })
     .catch(e =>{
       console.log(e);

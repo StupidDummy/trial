@@ -12,7 +12,7 @@
     <ion-list>
     <ion-item>
         <ion-label>Date</ion-label>
-        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="newAlarm.date" name="date" ></ion-datetime>
+        <ion-datetime displayFormat="MMM DD YYYY, DDD" [(ngModel)]="data.date" name="date" ></ion-datetime>
     </ion-item>
     <ion-item>
         <ion-label>Time :</ion-label>
@@ -28,33 +28,33 @@
                     <ion-col col-6>
                         <ion-item>
                             <ion-label>M</ion-label>
-                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.mon" name="mon"></ion-checkbox>
+                            <ion-checkbox [(ngModel)]="data.mon" name="mon"></ion-checkbox>
                         </ion-item>
                         <ion-item>
                             <ion-label>T</ion-label>
-                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.tue" name="tue"></ion-checkbox>
+                            <ion-checkbox [(ngModel)]="data.tue" name="tue"></ion-checkbox>
                         </ion-item>
                         <ion-item>
                             <ion-label>W</ion-label>
-                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.wed" name="wed"></ion-checkbox>
+                            <ion-checkbox [(ngModel)]="data.wed" name="wed"></ion-checkbox>
                         </ion-item>
                         <ion-item>
                             <ion-label>T</ion-label>
-                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.thru" name="thru"></ion-checkbox>
+                            <ion-checkbox [(ngModel)]="data.thur" name="thur"></ion-checkbox>
                         </ion-item>
                     </ion-col>
                     <ion-col col-6>
                         <ion-item>
                             <ion-label>F</ion-label>
-                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.fri" name="fri"></ion-checkbox>
+                            <ion-checkbox [(ngModel)]="data.fri" name="fri"></ion-checkbox>
                         </ion-item>
                         <ion-item>
                             <ion-label>S</ion-label>
-                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.sat" name="sat"></ion-checkbox>
+                            <ion-checkbox [(ngModel)]="data.sat" name="sat"></ion-checkbox>
                         </ion-item>
                         <ion-item>
                             <ion-label>S</ion-label>
-                            <ion-checkbox checked="false" [(ngModel)]="newAlarm.sun" name="sun"></ion-checkbox>
+                            <ion-checkbox [(ngModel)]="data.sun" name="sun"></ion-checkbox>
                         </ion-item>
                     </ion-col>
                 </ion-row>
