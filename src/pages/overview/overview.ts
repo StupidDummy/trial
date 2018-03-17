@@ -17,7 +17,10 @@ export class OverviewPage {
     occupation: 'Designer',
     location: 'Seattle, WA',
     description: 'A wise man once said: The more you do something, the better you will become at it.',
-    
+    waketime : '',
+    performance: 0,
+    bedtime : '',
+    sleeplength: 0
   };
   
 
@@ -35,6 +38,9 @@ export class OverviewPage {
         db.executeSql('SELECT * FROM account WHERE email=?',[res.rows.item(0).email])
         .then(res=>{
           this.user.name = res.rows.item(0).name
+          this.user.waketime = res.rows.item(0).waketime
+          this.user.performance = res.rows.item(0).performance
+          this.user.bedtime = res.rows.item(0).bedtime
         })
         .catch(e => {
           this.toast.show('No detail fetched!','5000','center').subscribe(

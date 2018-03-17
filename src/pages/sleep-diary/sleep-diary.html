@@ -10,7 +10,7 @@
     <ion-content padding>
         <ion-card>
             <ion-card-header>
-                    Hi Gilbert, here are you sleep diary summary!
+                    Hi {{user.name}}, here are some insight about your sleep!
             </ion-card-header>
             <ion-card-content>
                 <ion-grid >
@@ -27,7 +27,7 @@
                     <ion-row>
                         <ion-col col-8>Wake Time</ion-col>
                         <ion-col col-1>:</ion-col>
-                        <ion-col col-3>07:30</ion-col>
+                        <ion-col col-3>{{user.time}}</ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col col-8>Sleep Duration</ion-col>
@@ -35,10 +35,16 @@
                         <ion-col col-3>{{averageSleepTime}} hours</ion-col>
                     </ion-row>
                 </ion-grid>
-                <canvas #lineCanvas></canvas>
-                <canvas #lineCanvas2></canvas>
+                <ion-card>
+                    <canvas #lineCanvas  width="125px" height="100px"></canvas>
+                </ion-card>
+                <ion-card>
+                    <canvas #lineCanvas2 width="125px" height="100px "></canvas>
+                </ion-card>      
+                  
             </ion-card-content>
         </ion-card>
+        
         <div>
             <ion-slides >
                 <ion-slide *ngFor="let item of recentDiary">

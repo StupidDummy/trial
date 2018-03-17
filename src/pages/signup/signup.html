@@ -10,22 +10,56 @@
 <ion-content>
   <form (submit)="doSignup()">
     <ion-list>
-
-      <ion-item>
-        <ion-label floating>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
-
+      <ion-card>
+        <ion-card-header>
+          Personal Information
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-label>{{ 'NAME' | translate }}</ion-label>
+                <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>{{ 'EMAIL' | translate }}</ion-label>
+                <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label>{{ 'PASSWORD' | translate }}</ion-label>
+                <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+              </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          Lifestyle and habit
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-label >I am smoker</ion-label>
+                <ion-checkbox [(ngModel)]="account.smoke" name="smoke"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label >I drink beer</ion-lael>
+                <ion-checkbox [(ngModel)]="account.beer" name="beer"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label >I drink coffee</ion-label>
+                <ion-checkbox [(ngModel)]="account.coffee" name="coffee"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label> What time do you wake-up?</ion-label>
+                <ion-datetime displayFormat="HH:mm" [(ngModel)]= "account.waketime" name="waketime"></ion-datetime>
+              </ion-item>
+              <ion-item>
+                <ion-label>How many hours do you sleep?</ion-label>
+                <ion-input type="number" [(ngModel)]="account.sleeplength" name="sleeplength"></ion-input>
+              </ion-item>
+        </ion-card-content>
+      </ion-card>
+      
+      
       <div text-center>
         <button ion-button color="primary" >{{ 'SIGNUP_BUTTON' | translate }}</button>
       </div>

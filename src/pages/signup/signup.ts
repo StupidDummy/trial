@@ -15,10 +15,16 @@ export class SignupPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { name: string, email: string, password: string } = {
+  account: { name: string, email: string, password: string, smoke: boolean, beer: boolean, coffee: boolean, waketime: Date, sleeplength: number, performance: number } = {
     name: '',
     email: '',
-    password: ''
+    password: '',
+    smoke: false,
+    beer: false,
+    coffee: false,
+    waketime: new Date(),
+    sleeplength: 0,
+    performance: 0
   };
   result : 'false'
   // Our translated text strings
@@ -38,13 +44,13 @@ export class SignupPage {
       name:'ionicalarm.db',
       location: 'default'
     }).then((db: SQLiteObject)=>{
-      db.executeSql('CREATE TABLE IF NOT EXISTS account(rowid INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT)',{})
+      db.executeSql('CREATE TABLE IF NOT EXISTS account(rowid INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, smoke TEXT, beer TEXT, coffee TEXT, waketime TEXT, sleeplength TEXT, performance TEXT)',{})
       .then(res=> console.log('Executed SQL'))
       .catch(e => console.log(e));
-      db.executeSql('SELECT * FROM account WHERE email=?',[this.account.email])
+      db.executeSql('SELECT email FROM account WHERE email=?',[this.account.email])
       .then(res=>{
         if((res.rows.length == 0 && this.account.email != '') || (res.rows.length != 0 && res.rows.item(0).email != this.account.email)){
-          db.executeSql('INSERT INTO account VALUES(NULL,?,?,?)',[this.account.name,this.account.email, this.account.password])
+          db.executeSql('INSERT INTO account VALUES(NULL,?,?,?,?,?,?,?,?,?)',[this.account.name,this.account.email, this.account.password, this.account.smoke, this.account.beer, this.account.coffee,this.account.waketime,this.account.sleeplength,0])
           .then(res=>{
             this.toast.show('registered successfully','5000','center').subscribe(
               toast =>{
@@ -76,12 +82,15 @@ export class SignupPage {
         }
       })
       .catch(e => {
-        this.toast.show('db creation failed ' + e,'5000','center').subscribe(
+        this.toast.show('failed to find account ' + e,'5000','center').subscribe(
           toast =>{
             this.navCtrl.setRoot(WelcomePage);
           }
         );
       });
+
+
+
     })
   }
 }

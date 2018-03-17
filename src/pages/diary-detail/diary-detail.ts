@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
+import { SleepDiaryPage } from '../sleep-diary/sleep-diary';
 
 
 @IonicPage()
@@ -10,6 +11,7 @@ import { Toast } from '@ionic-native/toast';
   templateUrl: 'diary-detail.html',
 })
 export class DiaryDetailPage {
+
 
   public idDetail;
   detailDiary : any[]
@@ -65,7 +67,7 @@ export class DiaryDetailPage {
     this.getDiaryData(this.idDetail)
   }
   
-  updateEnty(rowid,tib,tfa,twu,toob){
+  updateEntry(rowid,tib,tfa,twu,toob){
 
     this.sqlite.create({
       name: 'ionicalarm.db',
@@ -81,7 +83,17 @@ export class DiaryDetailPage {
         );
         this.navCtrl.popToRoot();
       })
+      .catch(e=>{
+        console.log(e);
+          this.toast.show('update failed ' + e,'5000','center').subscribe(
+            toast => {
+              console.log(toast);
+            }
+          );
+          this.navCtrl.popToRoot();
+      })
     })
+    
   }
 
   deleteEntry(rowid) {
