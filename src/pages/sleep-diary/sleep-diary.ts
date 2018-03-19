@@ -14,18 +14,20 @@ export class SleepDiaryPage {
   user = {
     name : '',
     time : '',
+    performance: 0,
+    sleeplength: 0,
+    bedtime: '',
+
+
   }
   sleepTotalDuration = 0
   inBedTotalDuration = 0
   sleepPerformance :any
   averageSleepTime :any
   recentDuration:any[]
-  recentDataTFA:any[];
-  recentDataTWU:any[];
   recentDate:any[];
   recentDiary: any[];
-  scheduledTWU:any[];
-  scheduledTFA:any[];
+  
   lineChart: any;
   session : string
   entry = {
@@ -37,7 +39,6 @@ export class SleepDiaryPage {
   };
   
   @ViewChild('lineCanvas') lineCanvas;
-  @ViewChild('lineCanvas2') lineCanvas2;
 
   constructor(public navCtrl: NavController,
     private sqlite: SQLite,
@@ -55,7 +56,10 @@ export class SleepDiaryPage {
         db.executeSql('SELECT * FROM account WHERE email=?',[res.rows.item(0).email])
         .then(res=>{
           this.user.name = res.rows.item(0).name
-          this.user.time = res.rows.item(0).time
+          this.user.time = res.rows.item(0).waketime
+          this.user.performance = res.rows.item(0).performance
+          this.user.sleeplength = res.rows.item(0).sleeplength
+          this.user.bedtime = new Date(((Number(res.rows.item(0).waketime.toString().substring(0,2))*3600+Number(res.rows.item(0).waketime.toString().substring(3,5))*60-Number(res.rows.item(0).sleeplength*3600))+Number(res.rows.item(0).sleeplength*3600)%1800)*1000).toISOString().substr(11, 5)
         })
         .catch(e => {
           this.toast.show('No detail fetched!','5000','center').subscribe(
@@ -97,179 +101,46 @@ export class SleepDiaryPage {
       .catch(e => {
         console.log(e)
       });
-      db.executeSql('SELECT * FROM diaryHistory WHERE email=? ORDER BY date ASC LIMIT 7',[res.rows.item(0).email])
+      db.executeSql('SELECT * FROM diaryHistory WHERE email=? ORDER BY date DESC LIMIT 7',[res.rows.item(0).email])
       .then(res=> {
 
         this.recentDiary =[];
-        this.recentDataTFA =[];
-        this.recentDataTWU = [];
         this.recentDate =[];
         this.inBedTotalDuration = 0
         this.sleepTotalDuration = 0
-        this.inBedTotalDuration = 0
         this.sleepTotalDuration = 0
-        this.scheduledTFA =[];
-        this.scheduledTWU =[];
         for(var k=0; k<res.rows.length; k++){
           this.recentDiary.push({rowid:res.rows.item(k).rowid, date:res.rows.item(k).date,tib:res.rows.item(k).tib, tfa:res.rows.item(k).tfa, twu:res.rows.item(k).twu, toob: res.rows.item(k).toob})
           this.inBedTotalDuration += this.getDif(res.rows.item(k).tib,res.rows.item(k).toob)
           this.sleepTotalDuration += this.getDif(res.rows.item(k).tfa,res.rows.item(k).twu)
-          this.recentDataTFA.push(Number(res.rows.item(k).tfa.toString().substring(0,2))*3600+Number(res.rows.item(k).tfa.toString().substring(3,5))*60)
-          this.recentDataTWU.push(Number(res.rows.item(k).twu.toString().substring(0,2))*3600+Number(res.rows.item(k).twu.toString().substring(3,5))*60)
           this.recentDate.push(res.rows.item(k).date.toString().substring(8,10)+ '/'+res.rows.item(k).date.toString().substring(5,7)+ '/' + res.rows.item(k).date.toString().substring(2,4))
         }
         this.sleepPerformance = (this.sleepTotalDuration/this.inBedTotalDuration*100).toString().substring(0,5)
         this.averageSleepTime = (this.sleepTotalDuration/res.rows.length).toString().substring(0,3)
-        for(var j=0; j<res.rows.length; j++){
-          this.scheduledTWU.push(21600)
-          this.scheduledTFA.push((86400+this.averageSleepTime*3600-21600)-(86400+this.averageSleepTime*3600-21600)%1800)
-        }
-        this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-
-          type: 'line',
-          data: {
-              labels: this.recentDate,
-              datasets: [
-                  {
-                      label: "Time Fall Asleep",
-                      fill: false,
-                      lineTension: 0.1,
-                      backgroundColor: "rgba(75,192,192,0.4)",
-                      borderColor: "rgba(75,192,192,1)",
-                      borderCapStyle: 'butt',
-                      borderDash: [],
-                      borderDashOffset: 0.0,
-                      borderJoinStyle: 'miter',
-                      pointBorderColor: "rgba(75,192,192,1)",
-                      pointBackgroundColor: "#fff",
-                      pointBorderWidth: 1,
-                      pointHoverRadius: 5,
-                      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                      pointHoverBorderColor: "rgba(220,220,220,1)",
-                      pointHoverBorderWidth: 2,
-                      pointRadius: 1,
-                      pointHitRadius: 10,
-                      data: this.recentDataTFA,
-                      spanGaps: false,
-                  },{
-                    label: "Scheduled Sleep Time",
-                      fill: false,
-                      lineTension: 0.1,
-                      backgroundColor: "rgba(255,0,0,0.4)",
-                      borderColor: "rgba(255,0,0,1)",
-                      borderCapStyle: 'butt',
-                      borderDash: [],
-                      borderDashOffset: 0.0,
-                      borderJoinStyle: 'miter',
-                      pointBorderColor: "rgba(255,0,0,0.4)",
-                      pointBackgroundColor: "#fff",
-                      pointBorderWidth: 1,
-                      pointHoverRadius: 5,
-                      pointHoverBackgroundColor: "rgba(255,0,0,0.4)",
-                      pointHoverBorderColor: "rgba(220,220,220,1)",
-                      pointHoverBorderWidth: 2,
-                      pointRadius: 1,
-                      pointHitRadius: 10,
-                      data: this.scheduledTFA,
-                      spanGaps: false,
-                  }
-              ]
-          },
-          options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
-              yAxes: [{
-                ticks: {
-                  userCallback: function(v) { return epoch_to_hh_mm_ss(v) },
-                  stepSize: 30 * 60
-                }
-              }]
-            },
-            tooltips: {
-              callbacks: {
-                label: function(tooltipItem, data) {
-                  return data.datasets[tooltipItem.datasetIndex].label + ': ' + epoch_to_hh_mm_ss(tooltipItem.yLabel)
-                }
+        
+        if(this.sleepPerformance){
+          db.executeSql('UPDATE account SET performance=?,sleeplength=? WHERE email=?',[this.sleepPerformance, this.averageSleepTime,res.rows.item(0).email])
+          .then(res=>{
+            console.log(res);
+            this.toast.show('update successful','5000','center').subscribe(
+              toast => {
+                console.log(toast);
               }
-            }
-          }
-    
-        });
-        this.lineChart = new Chart(this.lineCanvas2.nativeElement, {
-
-          type: 'line',
-          data: {
-              labels: this.recentDate,
-              datasets: [
-                  {
-                      label: "Time Wake Up",
-                      fill: false,
-                      lineTension: 0.1,
-                      backgroundColor: "rgba(75,192,192,0.4)",
-                      borderColor: "rgba(75,192,192,1)",
-                      borderCapStyle: 'butt',
-                      borderDash: [],
-                      borderDashOffset: 0.0,
-                      borderJoinStyle: 'miter',
-                      pointBorderColor: "rgba(75,192,192,1)",
-                      pointBackgroundColor: "#fff",
-                      pointBorderWidth: 1,
-                      pointHoverRadius: 5,
-                      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                      pointHoverBorderColor: "rgba(220,220,220,1)",
-                      pointHoverBorderWidth: 2,
-                      pointRadius: 1,
-                      pointHitRadius: 10,
-                      data: this.recentDataTWU,
-                      spanGaps: false,
-                  },{
-                    label: "Scheduled Wake Up Time",
-                      fill: false,
-                      lineTension: 0.1,
-                      backgroundColor: "rgba(255,0,0,0.4)",
-                      borderColor: "rgba(255,0,0,1)",
-                      borderCapStyle: 'butt',
-                      borderDash: [],
-                      borderDashOffset: 0.0,
-                      borderJoinStyle: 'miter',
-                      pointBorderColor: "rgba(255,0,0,0.4)",
-                      pointBackgroundColor: "#fff",
-                      pointBorderWidth: 1,
-                      pointHoverRadius: 5,
-                      pointHoverBackgroundColor: "rgba(255,0,0,0.4)",
-                      pointHoverBorderColor: "rgba(220,220,220,1)",
-                      pointHoverBorderWidth: 2,
-                      pointRadius: 1,
-                      pointHitRadius: 10,
-                      data: this.scheduledTWU,
-                      spanGaps: false,
-                  }
-              ]
-          },
-          options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
-              yAxes: [{
-                ticks: {
-                  userCallback: function(v) { return epoch_to_hh_mm_ss(v) },
-                  stepSize: 30 * 60
+            );
+            this.user.performance =this.sleepPerformance
+            this.user.sleeplength = this.averageSleepTime
+            this.user.bedtime = new Date(((Number(this.user.time.toString().substring(0,2))*3600+Number(this.user.time.toString().substring(3,5))*60-Number(this.averageSleepTime*3600))+Number(this.averageSleepTime*3600)%1800)*1000).toISOString().substr(11, 5)
+            this.navCtrl.popToRoot();
+          })
+          .catch(e=>{
+            console.log(e);
+              this.toast.show('update failed ' + e,'5000','center').subscribe(
+                toast => {
+                  console.log(toast);
                 }
-              }]
-            },
-            tooltips: {
-              callbacks: {
-                label: function(tooltipItem, data) {
-                  return data.datasets[tooltipItem.datasetIndex].label + ': ' + epoch_to_hh_mm_ss(tooltipItem.yLabel)
-                }
-              }
-            }
-          }
-    
-        });
-        function epoch_to_hh_mm_ss(epoch) {
-          return new Date(epoch*1000).toISOString().substr(11, 5)
+              );
+              this.navCtrl.popToRoot();
+          })
         }
       })
       .catch(e =>{
@@ -321,6 +192,7 @@ export class SleepDiaryPage {
           }
         );
         this.getRecentDiary()
+        this.getSession()
         this.navCtrl.setRoot(this.navCtrl.getActive().component);
       })
       .catch(e =>{

@@ -11,10 +11,7 @@
   <ion-card *ngFor="let item of detailDiary" >
     <ion-card-header>
         <ion-datetime displayFormat="DDD, DD MMM YYYY" [(ngModel)]= "item.date"></ion-datetime>
-        <button ion-button color="primary" (click)="deleteEntry(item.rowid)">
-          <ion-icon name="trash">
-          </ion-icon>
-        </button>
+        
     </ion-card-header>
     <ion-card-content>
       <ion-item>
@@ -33,9 +30,15 @@
           <ion-label>Time Out Of Bed</ion-label>
           <ion-datetime displayFormat="HH:mm" [(ngModel)]= "item.toob"></ion-datetime>
       </ion-item>                    
-      <button ion-button color="primary" (click)="updateEntry(item.rowid,item.tib,item.tfa,item.twu,item.toob)">
+    </ion-card-content>
+    <div text-center>
+      <button ion-button round color="primary" (click)="updateEntry(item.rowid,item.tib,item.tfa,item.twu,item.toob)">
         Save
       </button>
-    </ion-card-content>
+      <button ion-button round color="primary" (click)="deleteEntry(item.rowid)">
+        Remove
+      </button>
+    </div>
   </ion-card> 
+  
 </ion-content>

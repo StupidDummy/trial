@@ -50,7 +50,7 @@ export class SignupPage {
       db.executeSql('SELECT email FROM account WHERE email=?',[this.account.email])
       .then(res=>{
         if((res.rows.length == 0 && this.account.email != '') || (res.rows.length != 0 && res.rows.item(0).email != this.account.email)){
-          db.executeSql('INSERT INTO account VALUES(NULL,?,?,?,?,?,?,?,?,?)',[this.account.name,this.account.email, this.account.password, this.account.smoke, this.account.beer, this.account.coffee,this.account.waketime,this.account.sleeplength,0])
+          db.executeSql('INSERT INTO account VALUES(NULL,?,?,?,?,?,?,?,?,?)',[this.account.name,this.account.email, this.account.password, this.account.smoke, this.account.beer, this.account.coffee,this.account.waketime,(Number(this.account.sleeplength.toString().substring(0,2))+ Number((Number(this.account.sleeplength.toString().substring(3,5))/60).toString().substring(0,2).toString())),0])
           .then(res=>{
             this.toast.show('registered successfully','5000','center').subscribe(
               toast =>{

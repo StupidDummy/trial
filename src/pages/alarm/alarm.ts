@@ -274,7 +274,7 @@ export class AlarmPage {
         db.executeSql('SELECT * FROM account WHERE email=?',[res.rows.item(0).email])
         .then(res=>{
           this.user.name = res.rows.item(0).name
-          this.user.time = res.rows.item(0).time
+          this.user.time = res.rows.item(0).waketime
         })
         .catch(e => {
           this.toast.show('No detail fetched!','5000','center').subscribe(

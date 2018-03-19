@@ -39,23 +39,23 @@
             <ion-item>
                 <ion-label >I am smoker</ion-label>
                 <ion-checkbox [(ngModel)]="account.smoke" name="smoke"></ion-checkbox>
-              </ion-item>
-              <ion-item>
-                <ion-label >I drink beer</ion-lael>
-                <ion-checkbox [(ngModel)]="account.beer" name="beer"></ion-checkbox>
-              </ion-item>
-              <ion-item>
-                <ion-label >I drink coffee</ion-label>
-                <ion-checkbox [(ngModel)]="account.coffee" name="coffee"></ion-checkbox>
-              </ion-item>
-              <ion-item>
-                <ion-label> What time do you wake-up?</ion-label>
-                <ion-datetime displayFormat="HH:mm" [(ngModel)]= "account.waketime" name="waketime"></ion-datetime>
-              </ion-item>
-              <ion-item>
-                <ion-label>How many hours do you sleep?</ion-label>
-                <ion-input type="number" [(ngModel)]="account.sleeplength" name="sleeplength"></ion-input>
-              </ion-item>
+            </ion-item>
+            <ion-item>
+              <ion-label >I drink beer</ion-label>
+              <ion-checkbox [(ngModel)]="account.beer" name="beer"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label >I drink coffee</ion-label>
+              <ion-checkbox [(ngModel)]="account.coffee" name="coffee"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label> What time do you wake-up?</ion-label>
+              <ion-datetime displayFormat="HH:mm" [(ngModel)]= "account.waketime" name="waketime"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>How long do you sleep?</ion-label>
+              <ion-datetime displayFormat="HH:mm" [(ngModel)]= "account.sleeplength" name="sleeplength"></ion-datetime>
+            </ion-item>
         </ion-card-content>
       </ion-card>
       

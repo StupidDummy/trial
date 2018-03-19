@@ -43,7 +43,7 @@ export class DiaryDetailPage {
         this.detailDiary =[];
 
         for(var k=0; k<res.rows.length; k++){
-          this.detailDiary.push({rowid:res.rows.item(k).rowid, date:res.rows.item(k).date,tib:res.rows.item(k).tib, tfa:res.rows.item(k).tfa, twu:res.rows.item(k).twu, toob: res.rows.item(k).toob})
+          this.detailDiary.push({rowid : res.rows.item(k).rowid, date:res.rows.item(k).date,tib:res.rows.item(k).tib, tfa:res.rows.item(k).tfa, twu:res.rows.item(k).twu, toob: res.rows.item(k).toob})
         }
         this.detailDate = res.rows.item()
         this.toast.show('load successful','5000','center').subscribe(
@@ -111,7 +111,13 @@ export class DiaryDetailPage {
         );
         this.navCtrl.popToRoot();
       })
-      .catch(e => console.log(e));
+      .catch(e => {
+        this.toast.show('delete failed' +e,'5000','center').subscribe(
+          toast => {
+            console.log(toast);
+          }
+        );
+      });
     }).catch(e => console.log(e));
   }
 

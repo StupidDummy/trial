@@ -18,26 +18,40 @@
      </div></div>
   <ion-card>
     <ion-card-header>
-      Hi {{user.name}},
+      Hi {{user.name}}, here are overview of your sleep activity
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col col-8>Performance</ion-col>
           <ion-col col-1>:</ion-col>
-          <ion-col col-3>95%</ion-col>
+          <ion-col col-3>{{user.performance}}%</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-8>Bed Time</ion-col>
           <ion-col col-1>:</ion-col>
-          <ion-col col-3>22:00</ion-col>
+          <ion-col col-3>{{user.bedtime}}</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-8>Wake Time</ion-col>
           <ion-col col-1>:</ion-col>
-          <ion-col col-3>{{user.time}}</ion-col>
+          <ion-col col-3>{{user.waketime}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>Sleep length</ion-col>
+          <ion-col col-1>:</ion-col>
+          <ion-col col-3>{{user.sleeplength}} hours</ion-col>
         </ion-row>
       </ion-grid>
+      <ion-card>
+        <canvas #lineCanvas  width="300px" height="250px"></canvas>
+      </ion-card>
+      <ion-card>
+        <canvas #lineCanvas2 width="300px" height="250px "></canvas>
+      </ion-card> 
+      <ion-card>
+        <canvas #barCanvas width="300px" height="250px "></canvas>
+      </ion-card> 
     </ion-card-content>
   </ion-card>
 </ion-content>
