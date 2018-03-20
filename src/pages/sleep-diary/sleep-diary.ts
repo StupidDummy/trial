@@ -1,8 +1,8 @@
 import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { Chart } from 'chart.js'
 import { Toast } from '@ionic-native/toast';
+import { WelcomePage } from '../welcome/welcome';
 
 @IonicPage()
 @Component({
@@ -45,6 +45,29 @@ export class SleepDiaryPage {
     private toast: Toast,
   
   ) { }
+  
+  signOut(){ 
+    this.sqlite.create({
+    name:'ionicalarm.db',
+    location: 'default'
+  }).then((db: SQLiteObject)=>{
+    db.executeSql('DELETE FROM signedIn WHERE rowid=?',['1'])
+    .then(res=>{
+      this.toast.show('Sign Out successfully','5000','center').subscribe(
+        toast =>{
+          this.navCtrl.setRoot(WelcomePage);
+        }
+      );
+    })
+    .catch(e =>{
+      this.toast.show('Sign Out failed','5000','center').subscribe(
+        toast =>{
+          this.navCtrl.setRoot(WelcomePage);
+        }
+      );
+    });
+  }).catch(e => console.log(e))
+  }
 
   getSession(){
     this.sqlite.create({

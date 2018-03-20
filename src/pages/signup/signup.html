@@ -37,11 +37,11 @@
         </ion-card-header>
         <ion-card-content>
             <ion-item>
-                <ion-label >I am smoker</ion-label>
-                <ion-checkbox [(ngModel)]="account.smoke" name="smoke"></ion-checkbox>
+              <ion-label >I am smoker</ion-label>
+              <ion-checkbox [(ngModel)]="account.smoke" name="smoke"></ion-checkbox>
             </ion-item>
             <ion-item>
-              <ion-label >I drink beer</ion-label>
+              <ion-label >I drink alcohol</ion-label>
               <ion-checkbox [(ngModel)]="account.beer" name="beer"></ion-checkbox>
             </ion-item>
             <ion-item>
@@ -49,7 +49,7 @@
               <ion-checkbox [(ngModel)]="account.coffee" name="coffee"></ion-checkbox>
             </ion-item>
             <ion-item>
-              <ion-label> What time do you wake-up?</ion-label>
+              <ion-label>What time do you wake-up?</ion-label>
               <ion-datetime displayFormat="HH:mm" [(ngModel)]= "account.waketime" name="waketime"></ion-datetime>
             </ion-item>
             <ion-item>

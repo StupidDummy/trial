@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
-import { FirstRunPage,MainPage } from '../pages/pages';
+import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
 @Component({
   templateUrl: `app.html`
@@ -18,7 +18,7 @@ export class MyApp {
     { title: 'Overview', component: 'OverviewPage' },
     { title: 'Sleep Diary', component: 'SleepDiaryPage'},
     { title: 'Alarm', component: 'AlarmPage'},
-    { title: 'Settings', component: 'SettingsPage' },
+    { title: 'Settings', component: 'ProfSettingPage' },
     { title: 'Meditation', component: 'MeditationPage'},
     { title: 'About Sleep', component: 'AboutSleepPage'},
   ]

@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Overview</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="signOut()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -13,8 +18,7 @@
       <div id="profile-info" padding>
         <img id="profile-image" [src]="user.profileImage">
         <h3 id="profile-name">{{user.name}}</h3>
-        <p>{{user.occupation}} &bull; {{user.location}}</p>
-        <p class="profile-description">{{user.description}}</p>
+        <p>{{user.full}}</p>
      </div></div>
   <ion-card>
     <ion-card-header>

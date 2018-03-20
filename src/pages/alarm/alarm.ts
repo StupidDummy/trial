@@ -3,6 +3,7 @@ import { IonicPage, NavController, AlertController,Platform } from 'ionic-angula
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
+import { WelcomePage } from '../welcome/welcome';
 
 declare var cordova;
 
@@ -60,7 +61,28 @@ export class AlarmPage {
     this.navCtrl.push('AddAlarmPage')
   }
 
-
+  signOut(){ 
+    this.sqlite.create({
+    name:'ionicalarm.db',
+    location: 'default'
+  }).then((db: SQLiteObject)=>{
+    db.executeSql('DELETE FROM signedIn WHERE rowid=?',['1'])
+    .then(res=>{
+      this.toast.show('Sign Out successfully','5000','center').subscribe(
+        toast =>{
+          this.navCtrl.setRoot(WelcomePage);
+        }
+      );
+    })
+    .catch(e =>{
+      this.toast.show('Sign Out failed','5000','center').subscribe(
+        toast =>{
+          this.navCtrl.setRoot(WelcomePage);
+        }
+      );
+    });
+  }).catch(e => console.log(e))
+  }
 
   scheduleNotification(rowid, time, enable, day){
     
@@ -187,7 +209,7 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
+              this.toast.show(this.test.toString() + " scheduled!","15000",'center').subscribe(
                 toast =>{
                   console.log(toast);
                 }
@@ -323,7 +345,7 @@ export class AlarmPage {
     }
     return this.temp.join(', ')
   }
-
+  
   deleteAlarm(rowid) {
     this.sqlite.create({
       name: 'ionicalarm.db',

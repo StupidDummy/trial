@@ -44,13 +44,13 @@ export class SignupPage {
       name:'ionicalarm.db',
       location: 'default'
     }).then((db: SQLiteObject)=>{
-      db.executeSql('CREATE TABLE IF NOT EXISTS account(rowid INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, smoke TEXT, beer TEXT, coffee TEXT, waketime TEXT, sleeplength TEXT, performance TEXT)',{})
+      db.executeSql('CREATE TABLE IF NOT EXISTS account(rowid INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT, smoke TEXT, beer TEXT, coffee TEXT, waketime TEXT, sleeplength TEXT, performance TEXT, notif TEXT)',{})
       .then(res=> console.log('Executed SQL'))
       .catch(e => console.log(e));
       db.executeSql('SELECT email FROM account WHERE email=?',[this.account.email])
       .then(res=>{
         if((res.rows.length == 0 && this.account.email != '') || (res.rows.length != 0 && res.rows.item(0).email != this.account.email)){
-          db.executeSql('INSERT INTO account VALUES(NULL,?,?,?,?,?,?,?,?,?)',[this.account.name,this.account.email, this.account.password, this.account.smoke, this.account.beer, this.account.coffee,this.account.waketime,(Number(this.account.sleeplength.toString().substring(0,2))+ Number((Number(this.account.sleeplength.toString().substring(3,5))/60).toString().substring(0,2).toString())),0])
+          db.executeSql('INSERT INTO account VALUES(NULL,?,?,?,?,?,?,?,?,?,?)',[this.account.name,this.account.email, this.account.password, this.account.smoke, this.account.beer, this.account.coffee,this.account.waketime,(Number(this.account.sleeplength.toString().substring(0,2))+ Number((Number(this.account.sleeplength.toString().substring(3,5))/60).toString().substring(0,2).toString())),0,'true'])
           .then(res=>{
             this.toast.show('registered successfully','5000','center').subscribe(
               toast =>{

@@ -1,0 +1,37 @@
+<!--
+  Generated template for the ProfSettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Setting</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="signOut()">
+          <ion-icon name="power"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form>
+    <ion-list>
+
+      <ion-item *ngFor="let item of reminder">
+        <ion-label>Reminder</ion-label>
+        <ion-toggle enabled checked={{item.notif}} (ionChange)="updateEnable(item.notif)"></ion-toggle>
+      </ion-item>
+      <button ion-item (click)="editProfile()">Edit Profile</button>
+      <button ion-item (click)="open('display')">Open Display</button>
+
+      <button ion-item (click)="signOut()">Sign Out</button>
+    </ion-list>
+  </form>
+</ion-content>
