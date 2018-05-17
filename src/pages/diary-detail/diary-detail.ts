@@ -33,10 +33,10 @@ export class DiaryDetailPage {
       ///tib = time in bed
       ///tfa = time fall asleep
       ///twu = time wake up
-      ///toob = time out of bed
-      db.executeSql('CREATE TABLE IF NOT EXISTS diaryHistory(rowid INTEGER PRIMARY KEY, date TEXT, tib TEXT, tfa TEXT, twu TEXT, toob TEXT)',{})
-      .then(res=> console.log('Executed SQL'))
-      .catch(e => console.log(e));
+      // ///toob = time out of bed
+      // db.executeSql('CREATE TABLE IF NOT EXISTS diaryHistory(rowid INTEGER PRIMARY KEY, date TEXT, tib TEXT, tfa TEXT, twu TEXT, toob TEXT)',{})
+      // .then(res=> console.log('Executed SQL'))
+      // .catch(e => console.log(e));
       db.executeSql('SELECT * FROM diaryHistory WHERE rowid=?',[rowid])
       .then(res=> {
 

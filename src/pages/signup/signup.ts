@@ -52,14 +52,14 @@ export class SignupPage {
         if((res.rows.length == 0 && this.account.email != '') || (res.rows.length != 0 && res.rows.item(0).email != this.account.email)){
           db.executeSql('INSERT INTO account VALUES(NULL,?,?,?,?,?,?,?,?,?,?)',[this.account.name,this.account.email, this.account.password, this.account.smoke, this.account.beer, this.account.coffee,this.account.waketime,(Number(this.account.sleeplength.toString().substring(0,2))+ Number((Number(this.account.sleeplength.toString().substring(3,5))/60).toString().substring(0,2).toString())),0,'true'])
           .then(res=>{
-            this.toast.show('registered successfully','5000','center').subscribe(
+            this.toast.show('Registered successfully','3000','center').subscribe(
               toast =>{
                 this.navCtrl.setRoot(WelcomePage);
               }
             );
           })
           .catch(e =>{
-            this.toast.show('insert failed','5000','center').subscribe(
+            this.toast.show('Register failed','5000','center').subscribe(
               toast =>{
                 this.navCtrl.setRoot(WelcomePage);
               }
@@ -74,7 +74,7 @@ export class SignupPage {
           );
         }
         else{
-          this.toast.show('email already registered!','5000','center').subscribe(
+          this.toast.show('Email already registered!','5000','center').subscribe(
             toast =>{
               console.log(toast);
             }
@@ -82,7 +82,7 @@ export class SignupPage {
         }
       })
       .catch(e => {
-        this.toast.show('failed to find account ' + e,'5000','center').subscribe(
+        this.toast.show('Failed to find account ' + e,'5000','center').subscribe(
           toast =>{
             this.navCtrl.setRoot(WelcomePage);
           }

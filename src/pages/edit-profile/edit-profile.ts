@@ -86,7 +86,7 @@ export class EditProfilePage {
             )
           })
           .catch(e =>{
-            this.toast.show('errorr!' + e,'5000','center').subscribe(
+            this.toast.show('error!' + e,'5000','center').subscribe(
               toast =>{
                 console.log(toast);
               }

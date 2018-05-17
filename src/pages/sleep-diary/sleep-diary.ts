@@ -145,11 +145,11 @@ export class SleepDiaryPage {
           db.executeSql('UPDATE account SET performance=?,sleeplength=? WHERE email=?',[this.sleepPerformance, this.averageSleepTime,res.rows.item(0).email])
           .then(res=>{
             console.log(res);
-            this.toast.show('update successful','5000','center').subscribe(
-              toast => {
-                console.log(toast);
-              }
-            );
+            // this.toast.show('update successful','5000','center').subscribe(
+            //   toast => {
+            //     console.log(toast);
+            //   }
+            // );
             this.user.performance =this.sleepPerformance
             this.user.sleeplength = this.averageSleepTime
             this.user.bedtime = new Date(((Number(this.user.time.toString().substring(0,2))*3600+Number(this.user.time.toString().substring(3,5))*60-Number(this.averageSleepTime*3600))+Number(this.averageSleepTime*3600)%1800)*1000).toISOString().substr(11, 5)
@@ -209,7 +209,7 @@ export class SleepDiaryPage {
       db.executeSql('INSERT INTO diaryHistory VALUES(NULL,?,?,?,?,?,?)',[this.entry.date.toString(),this.entry.timeInBed.toString(),this.entry.timeFallAsleep.toString(),this.entry.timeWakeUp.toString(),this.entry.timeOutOfBed.toString(),res.rows.item(0).email])
       .then(res=>{
         console.log(res);
-        this.toast.show('success input','5000','center').subscribe(
+        this.toast.show('Diary updated!','5000','center').subscribe(
           toast => {
             console.log(toast);
           }

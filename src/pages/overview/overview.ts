@@ -15,8 +15,8 @@ declare var cordova;
 export class OverviewPage {
 
   user = {
-    name: 'Paula Bolliger',
-    profileImage: 'assets/img/previewfile_876461475.jpg',
+    name: 'Example',
+    profileImage: 'assets/img/download.png',
     coverImage: 'assets/img/landscape-sky-night-stars-29435.jpg',
     occupation: 'Designer',
     location: 'Seattle, WA',
@@ -31,6 +31,8 @@ export class OverviewPage {
   
   test :any
   recentDataTFA:any[];
+  recentDataTIB:any[];
+  recentDataTOOB:any[];
   recentDataTWU:any[];
   recentDate:any[];
   scheduledTWU:any[];
@@ -75,11 +77,11 @@ export class OverviewPage {
                 data: { mydata:'Hidden Messages'},
                 every: 'day'
               });
-              this.toast.show('smoke!' +this.test.toString(),'2000','center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show('smoke!' +this.test.toString(),'2000','center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }else{
               this.localNotifications.cancel(255)
             }
@@ -98,11 +100,11 @@ export class OverviewPage {
                 data: { mydata:'Hidden Messages'},
                 every: 'day'
               });
-              this.toast.show('beer!' + this.test.toString(),'5000','center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show('beer!' + this.test.toString(),'5000','center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }else{
               this.localNotifications.cancel(256)
             }
@@ -120,11 +122,11 @@ export class OverviewPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'},
               });
-              this.toast.show('coffee!' + this.test.toString(),'8000','center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show('coffee!' + this.test.toString(),'8000','center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }else{
               this.localNotifications.cancel(257)
             }
@@ -146,6 +148,8 @@ export class OverviewPage {
             
           this.recentDataTFA =[];
           this.recentDataTWU = [];
+          this.recentDataTIB =[];
+          this.recentDataTOOB =[];
           this.recentDate =[];
           this.scheduledTFA =[];
           this.scheduledTWU =[];
@@ -161,6 +165,12 @@ export class OverviewPage {
             }else{
               this.scheduledTFA.push(Number(this.user.bedtime.toString().substring(0,2))*3600+Number(this.user.bedtime.toString().substring(3,5))*60)
             }
+            if(Number(res.rows.item(k).tib.toString().substring(0,2))<=12){
+              this.recentDataTIB.push(Number(res.rows.item(k).tib.toString().substring(0,2))*3600+86400+Number(res.rows.item(k).tib.toString().substring(3,5))*60)
+            }else{
+              this.recentDataTIB.push(Number(res.rows.item(k).tib.toString().substring(0,2))*3600+Number(res.rows.item(k).tib.toString().substring(3,5))*60)
+            }
+            this.recentDataTOOB.push(Number(res.rows.item(k).toob.toString().substring(0,2))*3600+Number(res.rows.item(k).toob.toString().substring(3,5))*60)
             this.recentDataTWU.push(Number(res.rows.item(k).twu.toString().substring(0,2))*3600+Number(res.rows.item(k).twu.toString().substring(3,5))*60)
             this.scheduledTWU.push(Number(this.user.waketime.toString().substring(0,2))*3600+Number(this.user.waketime.toString().substring(3,5))*60)
             this.recentDataSleepLength.push(this.getDif(res.rows.item(k).tfa,res.rows.item(k).twu))
@@ -215,6 +225,27 @@ export class OverviewPage {
                         pointRadius: 1,
                         pointHitRadius: 10,
                         data: this.scheduledTFA,
+                        spanGaps: false,
+                    },{
+                      label: "Time Go To Sleep",
+                        fill: false,
+                        lineTension: 0.1,
+                        backgroundColor: "rgba(124,252,0,0.4)",
+                        borderColor: "rgba(124,252,0,1)",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: "rgba(124,252,0,0.4)",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(124,252,0,0.4)",
+                        pointHoverBorderColor: "rgba(220,220,220,1)",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 1,
+                        pointHitRadius: 10,
+                        data: this.recentDataTIB,
                         spanGaps: false,
                     }
                 ]
@@ -288,6 +319,27 @@ export class OverviewPage {
                         pointHitRadius: 10,
                         data: this.scheduledTWU,
                         spanGaps: false,
+                    },{
+                      label: "Time Out Of Bed",
+                        fill: false,
+                        lineTension: 0.1,
+                        backgroundColor: "rgba(124,252,0,0.4)",
+                        borderColor: "rgba(124,252,0,1)",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: "rgba(124,252,0,0.4)",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(124,252,0,0.4)",
+                        pointHoverBorderColor: "rgba(220,220,220,1)",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 1,
+                        pointHitRadius: 10,
+                        data: this.recentDataTOOB,
+                        spanGaps: false,
                     }
                 ]
             },
@@ -320,12 +372,7 @@ export class OverviewPage {
                   datasets: [{
                       label: 'No. of Hours Sleep',
                       data: this.recentDataSleepLength,
-                      backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                      ],
-                      borderColor: [
-                          'rgba(255,99,132,1)',
-                      ],
+                      
                       borderWidth: 0.5
                   }]
               },

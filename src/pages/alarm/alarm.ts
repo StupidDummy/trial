@@ -97,11 +97,11 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }
             else if(day == 'tue'){
               this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(2)))
@@ -113,11 +113,11 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }
             else if(day == 'wed'){
               this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(3)))
@@ -129,11 +129,11 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }
             else if(day == 'thur'){
               this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(4)))
@@ -145,11 +145,11 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }
             else if(day == 'fri'){
               this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(5)))
@@ -161,11 +161,11 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }
             else if(day == 'sat'){
               this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(6)))
@@ -177,11 +177,11 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }
             else if(day == 'sun'){
               this.test = new Date(new Date().setDate(new Date().getDate()+this.getDiffDay(7)))
@@ -193,11 +193,11 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show(this.test.toString() + " scheduled!","5000",'center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }
             else {
               this.test = new Date(new Date().setFullYear(Number(day.toString().substring(0,4)), Number(day.toString().substring(5,7))-1, Number(day.toString().substring(8,10))))
@@ -209,11 +209,11 @@ export class AlarmPage {
                 at : this.test,
                 data: { mydata:'Hidden Messages'}
               });
-              this.toast.show(this.test.toString() + " scheduled!","15000",'center').subscribe(
-                toast =>{
-                  console.log(toast);
-                }
-              );
+              // this.toast.show(this.test.toString() + " scheduled!","15000",'center').subscribe(
+              //   toast =>{
+              //     console.log(toast);
+              //   }
+              // );
             }
         }else{
           this.localNotifications.cancel(rowid)

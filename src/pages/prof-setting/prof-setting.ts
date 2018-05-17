@@ -82,11 +82,11 @@ export class ProfSettingPage {
           db.executeSql('UPDATE account SET notif=? WHERE email=?',[reminder,res.rows.item(0).email])
           .then(res=>{
             console.log(res);
-            this.toast.show(String('notif updated! ' + reminder),'1000','center').subscribe(
-              toast =>{
-                console.log(toast);
-              }
-            )
+            // this.toast.show(String('notification updated! ' + reminder),'1000','center').subscribe(
+            //   toast =>{
+            //     console.log(toast);
+            //   }
+            // )
           })
           this.getSession()
       })

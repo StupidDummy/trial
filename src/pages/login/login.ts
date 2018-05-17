@@ -21,7 +21,7 @@ export class LoginPage {
     keepSignedIn: false
   };
   temp: any[]
-  data : any[]
+  // data : any[]
   // Our translated text strings
   private loginErrorString: string;
 
@@ -36,52 +36,54 @@ export class LoginPage {
       this.loginErrorString = value;
     })
   }
-  showdata(){
-    this.sqlite.create({
-      name: 'ionicalarm.db',
-      location: 'default'
-    }).then((db: SQLiteObject)=>{
-      db.executeSql('SELECT * FROM account',{})
-      .then(res=>{
-        this.data =[];
-        for(var i=0; i<res.rows.length; i++){
-          this.data.push({rowid:res.rows.item(i).rowid, name:res.rows.item(i).name,email:res.rows.item(i).email,password:res.rows.item(i).password})
-        }
-      })
-      .catch(e =>{
-        console.log(e);
-        this.toast.show('error','5000','center').subscribe(
-          toast =>{
-            console.log(toast);
-          }
-        );
-      });
-    })
-    .catch(e =>{
-      console.log(e);
-      this.toast.show(e,'5000','center').subscribe(
-        toast =>{
-          console.log(toast);
-        }
-      )
-    })
-  }
-  delete(rowid){
-    this.sqlite.create({
-      name: 'ionicalarm.db',
-      location: 'default'
-    }).then((db: SQLiteObject) => {
-      db.executeSql('DELETE FROM account WHERE rowid=?', [rowid])
-      .then(res => {
-        console.log(res);
-        this.toast.show('deleted ' + rowid,'5000','center').subscribe(
-          toast =>{
-            console.log(toast);
-        });
-      })
-      .catch(e => console.log(e));
-    }).catch(e => console.log(e));
-  }
+
+  // showdata(){
+  //   this.sqlite.create({
+  //     name: 'ionicalarm.db',
+  //     location: 'default'
+  //   }).then((db: SQLiteObject)=>{
+  //     db.executeSql('SELECT * FROM account',{})
+  //     .then(res=>{
+  //       this.data =[];
+  //       for(var i=0; i<res.rows.length; i++){
+  //         this.data.push({rowid:res.rows.item(i).rowid, name:res.rows.item(i).name,email:res.rows.item(i).email,password:res.rows.item(i).password})
+  //       }
+  //     })
+  //     .catch(e =>{
+  //       console.log(e);
+  //       this.toast.show('error','5000','center').subscribe(
+  //         toast =>{
+  //           console.log(toast);
+  //         }
+  //       );
+  //     });
+  //   })
+  //   .catch(e =>{
+  //     console.log(e);
+  //     this.toast.show(e,'5000','center').subscribe(
+  //       toast =>{
+  //         console.log(toast);
+  //       }
+  //     )
+  //   })
+  // }
+
+  // delete(rowid){
+  //   this.sqlite.create({
+  //     name: 'ionicalarm.db',
+  //     location: 'default'
+  //   }).then((db: SQLiteObject) => {
+  //     db.executeSql('DELETE FROM account WHERE rowid=?', [rowid])
+  //     .then(res => {
+  //       console.log(res);
+  //       this.toast.show('deleted ' + rowid,'5000','center').subscribe(
+  //         toast =>{
+  //           console.log(toast);
+  //       });
+  //     })
+  //     .catch(e => console.log(e));
+  //   }).catch(e => console.log(e));
+  // }
   // Attempt to login in through our User service
   doLogin() {
     
@@ -109,11 +111,12 @@ export class LoginPage {
           .catch(e => console.log(e));
           db.executeSql('INSERT INTO session VALUES(NULL,?)',[this.account.email])
           .then(res=> {
-            this.toast.show('session inserted!'+this.account.email,'5000','center').subscribe(
-              toast =>{
-                console.log(toast);
-              }
-            );
+            // this.toast.show('session inserted!'+this.account.email,'5000','center').subscribe(
+            //   toast =>{
+            //     console.log(toast);
+            //   }
+            // );
+            console.log(res)
           })
           .catch(e => {this.toast.show('Error saving session '+ e,'5000','center').subscribe(
             toast =>{
@@ -161,7 +164,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad(){
-    this.showdata()
+    // this.showdata()
   }
 
 }
